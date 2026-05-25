@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use App\Repository\ProductRepository;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
@@ -24,20 +25,13 @@ class ProductController extends AbstractController
         $products = $this->productRepo->findAll();
         return $this->render('index.html.twig', [
             'products' => $products
-        ]
-        );
-    }
-
-    #[Route(path: '/category/products', name: 'app_by_categorie')]
-    public function product_by_category() : Response
-    {
-        return $this->render('products_by_category.html.twig');
+        ]);
     }
 
     #[Route(path: '/products/details/{id}', name: 'app_product_show')]
     public function product_details(#[MapEntity()] Product $product): Response
     {
-        return $this->render('product_details.html.twig', [
+        return $this->render('product/product_details.html.twig', [
             'product' => $product,
         ]);
     }
